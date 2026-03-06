@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LessonSchedule</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>  
+    <header>
+        <div class="menu">
+            <a href="index.html" class="logo">
+                <img src="logo.png" alt="" width="60">
+                LessonSchedule
+            </a>
+            <ul class="menu-list">
+                <li><a href="index.html" class="menu-link">Home</a></li>
+                <li><a href="contact.html" class="menu-link">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+    <main class="container">
+       <h2>Про додаток</h2>
+
+       <p>Додаток розробила молода команда фронтенд-розробників у школі Logika.</p>
+       <p>Якщо у вас виникли питання чи пропозиції, надсилайте їх на пошту <a href="mailto:volodymyr.logika@gmail.com<">volodymyr.logika@gmail.com</a></p>
+      
+    </main>
+    <footer>
+        <a href="https://www.freepik.com/icon/time_5696866#fromView=search&page=1&position=3&uuid=ec140cdd-6295-4013-8cca-b46ebbbd7b9a">Icon by Freepik</a>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
