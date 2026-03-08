@@ -49,9 +49,7 @@
     
     #days li:hover,
     #days li.active{
-    background:grey;
-    border-color:black;
-    color:black;
+    background:#d3d3d3;
     }
     
     #schedule-details{
@@ -226,3 +224,89 @@
     }
     
     }
+    logo{
+        size:7rem;
+    }
+
+    #days li {
+        cursor: pointer;
+        padding: 8px 15px;
+      }
+      
+      #days li.active {
+        background: #6c63ff;
+        color: white;
+        border-radius: 6px;
+      }
+      body{
+        font-family:Arial, sans-serif;
+        margin:0;
+        padding:20px;
+        background:#f5f5f5;
+        }
+        
+        .app-title{
+        text-align:center;
+        margin-bottom:20px;
+        }
+        
+        .container{
+        display:flex;
+        gap:40px;
+        max-width:900px;
+        margin:auto;
+        }
+        
+        #schedule{
+        width:200px;
+        }
+        
+        #days{
+        list-style:none;
+        padding:0;
+        margin:0;
+        }
+        
+        #days li{
+        padding:8px;
+        cursor:pointer;
+        border-radius:5px;
+        }
+        
+        #days li:hover
+        
+        #days li.active{
+        background:#d3d3d3;
+        }
+        
+        .todo-area{
+        flex:1;
+        }
+        
+        .todo-list{
+        list-style:none;
+        padding:0;
+        margin-bottom:15px;
+        }
+        
+        .todo-item{
+        display:flex;
+        align-items:center;
+        gap:10px;
+        margin-bottom:10px;
+        }
+        
+        .delete-todo{
+        margin-left:auto;
+        cursor:pointer;
+        border:none;
+        background:none;
+        }
+        
+        .inputselect{
+        width:100%;
+        padding:8px;
+        border:1px solid #aaa;
+        border-radius:4px;
+        }
+        
