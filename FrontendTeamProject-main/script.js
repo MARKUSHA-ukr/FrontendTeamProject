@@ -1,4 +1,3 @@
-/* Add a todo/ */
 
 let demoarray = [];
 
