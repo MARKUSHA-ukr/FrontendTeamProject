@@ -1,312 +1,210 @@
-:root{
-    --bg-color:#fff;
-    --color:#333;
-    --toggle-bg:#d4e7d5;
-    --toggle-slider:#fff;
-    --round-color:#fff;
-    }
-    
-    [data-theme="dark"]{
-    --bg-color:#333;
-    --color:#e9dcdc;
-    --toggle-bg:#333;
-    --toggle-slider:#e9dcdc;
-    --round-color:#333;
-    }
-    
-    *{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-    }
-    
-    body{
-    font-family:system-ui,sans-serif;
-    line-height:1.4;
-    background:var(--bg-color);
-    color:var(--color);
-    transition:.5s;
-    }
-    
-    #schedule{
-    display:flex;
-    }
-    
-    #days{
-    list-style:none;
-    flex:1;
-    }
-    
-    #days li{
-    padding:10px;
-    cursor:pointer;
-    background:#eee;
-    margin-bottom:5px;
-    border-radius:10px;
-    border:2px solid transparent;
-    transition:.2s;
-    }
-    
-    #days li:hover,
-    #days li.active{
-    background:#d3d3d3;
-    }
-    
-    #schedule-details{
-    flex:3;
-    padding:20px;
-    }
-    
-    nav{
-    display:flex;
-    justify-content:flex-end;
-    padding:20px 24px;
-    }
-    
-    .theme-switch{
-    position:relative;
-    width:60px;
-    height:34px;
-    }
-    
-    .theme-switch input{
-    display:none;
-    }
-    
-    .slider{
-    position:absolute;
-    inset:0;
-    cursor:pointer;
-    background:var(--toggle-bg);
-    transition:.4s;
-    }
-    
-    .slider::before{
-    content:"";
-    position:absolute;
-    left:4px;
-    bottom:4px;
-    width:26px;
-    height:26px;
-    background:var(--round-color);
-    transition:.4s;
-    }
-    
-    input:checked + .slider{
-    background:var(--toggle-slider);
-    }
-    
-    input:checked + .slider::before{
-    transform:translateX(26px);
-    }
-    
-    .slider.round{
-    border-radius:34px;
-    }
-    
-    .slider.round::before{
-    border-radius:50%;
-    }
-    
-    .container{
-    max-width:700px;
-    margin:auto;
-    padding:4rem 10px 0;
-    }
-    
-    .app-title{
-    text-align:center;
-    font-size:80px;
-    margin-bottom:20px;
-    }
-    
-    .todo-list{
-    list-style:none;
-    margin-bottom:20px;
-    }
-    
-    .todo-item{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    margin-bottom:10px;
-    }
-    
-    .todo-item span{
-    flex:1;
-    margin:0 10px;
-    font-size:22px;
-    }
-    
-    .done span{
-    text-decoration:line-through;
-    }
-    
-    input[type="checkbox"]{
-    display:none;
-    }
-    
-    .tick{
-    width:30px;
-    height:30px;
-    border:3px solid var(--color);
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    cursor:pointer;
-    }
-    
-    .tick::before{
-    content:"✔️";
-    display:none;
-    }
-    
-    .done .tick::before{
-    display:block;
-    }
-    
-    .delete-todo{
-    border:none;
-    background:none;
-    cursor:pointer;
-    }
-    
-    .delete-todo svg{
-    width:30px;
-    height:30px;
-    }
-    
-    form{
-    display:flex;
-    margin-bottom:2rem;
-    }
-    
-    input[type="text"]{
-    width:100%;
-    padding:10px;
-    border:3px solid #333;
-    border-radius:4px;
-    }
-    
-    .empty-state{
-    display:none;
-    flex-direction:column;
-    align-items:center;
-    }
-    
-    .todo-list:empty + .empty-state{
-    display:flex;
-    }
-    
-    .empty-state__title,
-    .empty-state__description{
-    font-size:25px;
-    text-align:center;
-    margin:2rem;
-    width:25rem;
-    }
-    
-    @media (max-width:608px){
-    
-    .container{
-    width:90%;
-    }
-    
-    .app-title{
-    font-size:3rem;
-    }
-    
-    .empty-state__title,
-    .empty-state__description{
-    font-size:1.5rem;
-    width:18rem;
-    }
-    
-    }
-    logo{
-        size:7rem;
-    }
+:root {
+  --bg-color: #fff;
+  --color: #333;
+  --toggle-bg: #d4e7d5;
+  --toggle-slider: #fff;
+  --round-color: #fff;
+  --day-bg: #eee;
+}
 
-    #days li {
-        cursor: pointer;
-        padding: 8px 15px;
-      }
-      
-      #days li.active {
-        background: #6c63ff;
-        color: white;
-        border-radius: 6px;
-      }
-      body{
-        font-family:Arial, sans-serif;
-        margin:0;
-        padding:20px;
-        background:#f5f5f5;
-        }
-        
-        .app-title{
-        text-align:center;
-        margin-bottom:20px;
-        }
-        
-        .container{
-        display:flex;
-        gap:40px;
-        max-width:900px;
-        margin:auto;
-        }
-        
-        #schedule{
-        width:200px;
-        }
-        
-        #days{
-        list-style:none;
-        padding:0;
-        margin:0;
-        }
-        
-        #days li{
-        padding:8px;
-        cursor:pointer;
-        border-radius:5px;
-        }
-        
-        #days li:hover
-        
-        #days li.active{
-        background:#d3d3d3;
-        }
-        
-        .todo-area{
-        flex:1;
-        }
-        
-        .todo-list{
-        list-style:none;
-        padding:0;
-        margin-bottom:15px;
-        }
-        
-        .todo-item{
-        display:flex;
-        align-items:center;
-        gap:10px;
-        margin-bottom:10px;
-        }
-        
-        .delete-todo{
-        margin-left:auto;
-        cursor:pointer;
-        border:none;
-        background:none;
-        }
-        
-        .inputselect{
-        width:100%;
-        padding:8px;
-        border:1px solid #aaa;
-        border-radius:4px;
-        }
-        
+[data-theme="dark"] {
+  --bg-color: #333;
+  --color: #e9dcdc;
+  --toggle-bg: #555;
+  --toggle-slider: #999;
+  --round-color: #333;
+  --day-bg: #444;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, sans-serif;
+  background: var(--bg-color);
+  color: var(--color);
+  transition: 0.3s;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 60px;
+  position: relative;
+}
+
+/* Кнопка-емодзі справа зверху */
+.theme-emoji-btn {
+  position: fixed;
+  top: 30px;
+  right: 60px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 50px; /* Великий розмір для емодзі */
+  transition: transform 0.2s ease;
+  z-index: 1000;
+  user-select: none;
+}
+
+.theme-emoji-btn:hover {
+  transform: scale(1.2);
+}
+
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.app-title {
+  font-size: clamp(80px, 18vw, 220px);
+  font-weight: 900;
+  text-transform: uppercase;
+  margin-top: 20px;
+  line-height: 0.8;
+  text-align: center;
+  width: 100%;
+  letter-spacing: -5px;
+}
+
+.icon {
+  font-size: 100px;
+  margin: 30px 0;
+  color: var(--color);
+  display: block;
+  text-align: center;
+}
+
+#schedule {
+  width: 100%;
+  margin-bottom: 50px;
+}
+
+#days {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+#days li {
+  padding: 25px 45px;
+  background: var(--day-bg);
+  border-radius: 20px;
+  font-size: 26px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.3s;
+  color: var(--color);
+}
+
+#days li:hover,
+#days li.active {
+  background: var(--color);
+  color: var(--bg-color);
+  transform: translateY(-5px);
+}
+
+.todo-list {
+  width: 100%;
+  list-style: none;
+  margin-bottom: 50px;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  padding: 35px;
+  border-bottom: 4px solid var(--day-bg);
+  width: 100%;
+}
+
+.todo-item span {
+  font-size: 48px;
+  font-weight: 600;
+  flex: 1;
+}
+
+.tick {
+  width: 60px;
+  height: 60px;
+  border: 5px solid var(--color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.tick::before {
+  content: "✔";
+  font-size: 35px;
+  display: none;
+}
+
+.done .tick::before {
+  display: block;
+}
+
+.done span {
+  text-decoration: line-through;
+  opacity: 0.2;
+}
+
+.empty-state {
+  width: 100%;
+  text-align: center;
+}
+
+.empty-state__description {
+  font-size: 36px;
+  margin-bottom: 50px;
+  color: #999;
+  font-weight: 300;
+}
+
+form.formselect {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 60px;
+}
+
+.inputselect {
+  width: 100%;
+  max-width: 1100px;
+  padding: 40px;
+  font-size: 45px;
+  border: 8px solid var(--color);
+  border-radius: 40px;
+  background: transparent;
+  color: var(--color);
+  outline: none;
+  text-align: center;
+  font-weight: 700;
+}
+
+.delete-todo {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 40px;
+  color: #ff4444;
+  padding-left: 20px;
+}
+
+@media (max-width: 1024px) {
+  .theme-emoji-btn { top: 20px; right: 20px; font-size: 40px; }
+  .app-title { font-size: 100px; }
+  #days li { padding: 15px 25px; font-size: 20px; }
+  .todo-item span { font-size: 30px; }
+  .inputselect { font-size: 30px; }
+}
