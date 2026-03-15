@@ -34,15 +34,14 @@ body {
   position: relative;
 }
 
-/* Кнопка-емодзі справа зверху */
 .theme-emoji-btn {
   position: fixed;
   top: 30px;
-  right: 60px;
+  left: 30px;
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 50px; /* Великий розмір для емодзі */
+  font-size: 50px; 
   transition: transform 0.2s ease;
   z-index: 1000;
   user-select: none;
@@ -207,4 +206,40 @@ form.formselect {
   #days li { padding: 15px 25px; font-size: 20px; }
   .todo-item span { font-size: 30px; }
   .inputselect { font-size: 30px; }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+}
+
+.todo-item {
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(20px);
+  }
 }
