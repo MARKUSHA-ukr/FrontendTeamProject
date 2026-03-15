@@ -23,7 +23,7 @@ Simple **frontend task manager** for creating, tracking, and completing daily ta
 * JavaScript
 
 ---
-💡 Inspiration
+## 💡 Inspiration
 
 Part of the idea and some interface elements were inspired by the project:
 
