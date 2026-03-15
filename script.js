@@ -1,245 +1,168 @@
-:root {
-  --bg-color: #fff;
-  --color: #333;
-  --toggle-bg: #d4e7d5;
-  --toggle-slider: #fff;
-  --round-color: #fff;
-  --day-bg: #eee;
-}
+let demoarray = [];
+let currentDay = 'понеділок';
 
-[data-theme="dark"] {
-  --bg-color: #333;
-  --color: #e9dcdc;
-  --toggle-bg: #555;
-  --toggle-slider: #999;
-  --round-color: #333;
-  --day-bg: #444;
-}
+function renderTodo(todo) {
+  localStorage.setItem("demoarray", JSON.stringify(demoarray));
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+  const list = document.querySelector(".todo-list");
+  const item = document.querySelector(`[data-key='${todo.id}']`);
 
-body {
-  font-family: system-ui, sans-serif;
-  background: var(--bg-color);
-  color: var(--color);
-  transition: 0.3s;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  padding: 20px 60px;
-  position: relative;
-}
-
-.theme-emoji-btn {
-  position: fixed;
-  top: 30px;
-  left: 30px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 50px; 
-  transition: transform 0.2s ease;
-  z-index: 1000;
-  user-select: none;
-}
-
-.theme-emoji-btn:hover {
-  transform: scale(1.2);
-}
-
-.container {
-  width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.app-title {
-  font-size: clamp(80px, 18vw, 220px);
-  font-weight: 900;
-  text-transform: uppercase;
-  margin-top: 20px;
-  line-height: 0.8;
-  text-align: center;
-  width: 100%;
-  letter-spacing: -5px;
-}
-
-.icon {
-  font-size: 100px;
-  margin: 30px 0;
-  color: var(--color);
-  display: block;
-  text-align: center;
-}
-
-#schedule {
-  width: 100%;
-  margin-bottom: 50px;
-}
-
-#days {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  flex-wrap: wrap;
-}
-
-#days li {
-  padding: 25px 45px;
-  background: var(--day-bg);
-  border-radius: 20px;
-  font-size: 26px;
-  font-weight: 800;
-  cursor: pointer;
-  transition: 0.3s;
-  color: var(--color);
-}
-
-#days li:hover,
-#days li.active {
-  background: var(--color);
-  color: var(--bg-color);
-  transform: translateY(-5px);
-}
-
-.todo-list {
-  width: 100%;
-  list-style: none;
-  margin-bottom: 50px;
-}
-
-.todo-item {
-  display: flex;
-  align-items: center;
-  gap: 30px;
-  padding: 35px;
-  border-bottom: 4px solid var(--day-bg);
-  width: 100%;
-}
-
-.todo-item span {
-  font-size: 48px;
-  font-weight: 600;
-  flex: 1;
-}
-
-.tick {
-  width: 60px;
-  height: 60px;
-  border: 5px solid var(--color);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  flex-shrink: 0;
-}
-
-.tick::before {
-  content: "✔";
-  font-size: 35px;
-  display: none;
-}
-
-.done .tick::before {
-  display: block;
-}
-
-.done span {
-  text-decoration: line-through;
-  opacity: 0.2;
-}
-
-.empty-state {
-  width: 100%;
-  text-align: center;
-}
-
-.empty-state__description {
-  font-size: 36px;
-  margin-bottom: 50px;
-  color: #999;
-  font-weight: 300;
-}
-
-form.formselect {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  padding-bottom: 60px;
-}
-
-.inputselect {
-  width: 100%;
-  max-width: 1100px;
-  padding: 40px;
-  font-size: 45px;
-  border: 8px solid var(--color);
-  border-radius: 40px;
-  background: transparent;
-  color: var(--color);
-  outline: none;
-  text-align: center;
-  font-weight: 700;
-}
-
-.delete-todo {
-  border: none;
-  background: none;
-  cursor: pointer;
-  font-size: 40px;
-  color: #ff4444;
-  padding-left: 20px;
-}
-
-@media (max-width: 1024px) {
-  .theme-emoji-btn { top: 20px; right: 20px; font-size: 40px; }
-  .app-title { font-size: 100px; }
-  #days li { padding: 15px 25px; font-size: 20px; }
-  .todo-item span { font-size: 30px; }
-  .inputselect { font-size: 30px; }
-}
-
-@keyframes fadeOut {
-  from {
-    opacity: 1;
-    transform: translateX(0);
+  if (todo.deleted) {
+    if (item) {
+      item.style.animation = 'fadeOut 0.3s ease';
+      setTimeout(() => item.remove(), 300);
+    }
+    return;
   }
-  to {
-    opacity: 0;
-    transform: translateX(20px);
+
+  if (todo.day !== currentDay) return;
+
+  const isChecked = todo.checked ? "done" : "";
+  const newlist = document.createElement("li");
+  newlist.setAttribute("class", `todo-item ${isChecked}`);
+  newlist.setAttribute("data-key", todo.id);
+
+  newlist.innerHTML = `
+    <div class="tick js-tick"></div>
+    <span>${todo.text}</span>
+    <button class="delete-todo js-delete-todo">
+      <svg style="pointer-events: none;" fill="currentColor" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
+        <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
+      </svg>
+    </button>
+  `;
+
+  if (item) {
+    item.style.animation = 'fadeOut 0.3s ease';
+    setTimeout(() => {
+      list.replaceChild(newlist, item);
+    }, 300);
+  } else {
+    list.append(newlist);
+  }
+  
+  checkEmptyState();
+}
+
+function myFunction(text) {
+  const title = document.querySelector('.app-title');
+  const emptyState = document.querySelector('.empty-state');
+  
+  title.classList.add('hidden');
+  emptyState.classList.add('hidden');
+  
+  setTimeout(() => {
+    const todoobject = {
+      text,
+      checked: false,
+      id: Date.now(),
+      day: currentDay
+    };
+    demoarray.push(todoobject);
+    renderTodo(todoobject);
+  }, 500);
+}
+
+function toggleDone(key) {
+  const index = demoarray.findIndex((item) => item.id === Number(key));
+  if (index !== -1) {
+    demoarray[index].checked = !demoarray[index].checked;
+    renderTodo(demoarray[index]);
   }
 }
 
-.todo-item {
-  animation: slideIn 0.3s ease;
+function deleteTodo(key) {
+  const index = demoarray.findIndex((item) => item.id === Number(key));
+  if (index !== -1) {
+    const emptytodo = { ...demoarray[index], deleted: true };
+    demoarray = demoarray.filter((item) => item.id !== Number(key));
+    renderTodo(emptytodo);
+  }
 }
 
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-@keyframes fadeOut {
-  from {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateX(20px);
+function checkEmptyState() {
+  const title = document.querySelector('.app-title');
+  const emptyState = document.querySelector('.empty-state');
+  const dayTodos = demoarray.filter(todo => todo.day === currentDay && !todo.deleted);
+  
+  if (dayTodos.length === 0) {
+    title.classList.remove('hidden');
+    emptyState.classList.remove('hidden');
   }
 }
+
+const form = document.querySelector(".formselect");
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const input = document.querySelector(".inputselect");
+  const text = input.value.trim();
+  if (text !== "") {
+    myFunction(text);
+    input.value = "";
+    input.focus();
+  }
+});
+
+const list = document.querySelector(".todo-list");
+list.addEventListener("click", (event) => {
+  if (event.target.classList.contains("js-tick")) {
+    const itemKey = event.target.parentElement.dataset.key;
+    toggleDone(itemKey);
+  }
+
+  const deleteBtn = event.target.closest(".js-delete-todo");
+  if (deleteBtn) {
+    const itemKey = deleteBtn.parentElement.dataset.key;
+    deleteTodo(itemKey);
+  }
+});
+
+const emojiBtn = document.getElementById('theme-emoji');
+
+function setTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem("theme", theme);
+  if (emojiBtn) {
+    emojiBtn.textContent = theme === 'dark' ? '☀️' : '🌙';
+  }
+}
+
+if (emojiBtn) {
+  emojiBtn.addEventListener('click', () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+  });
+}
+
+
+let days = document.querySelectorAll("#days li");
+days.forEach(day => {
+  day.addEventListener("click", function() {
+    days.forEach(d => d.classList.remove("active"));
+    this.classList.add("active");
+    
+    currentDay = this.textContent.toLowerCase().trim();
+    renderAllTodos();
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const savedTheme = localStorage.getItem("theme") || "light";
+  setTheme(savedTheme);
+
+  const ref = localStorage.getItem("demoarray");
+  if (ref) {
+    demoarray = JSON.parse(ref);
+  }
+  
+  renderAllTodos();
+  
+  const input = document.querySelector(".inputselect");
+  input.addEventListener("focus", () => {
+    if (demoarray.filter(todo => todo.day === currentDay && !todo.deleted).length === 0) {
+      document.querySelector('.app-title').classList.remove('hidden');
+      document.querySelector('.empty-state').classList.remove('hidden');
+    }
+  });
+});
+
