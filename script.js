@@ -1,5 +1,5 @@
 let demoarray = [];
-let currentDay = 'понеділок';
+let currentDay = 'monday';
 
 function renderTodo(todo) {
   localStorage.setItem("demoarray", JSON.stringify(demoarray));
@@ -8,10 +8,7 @@ function renderTodo(todo) {
   const item = document.querySelector(`[data-key='${todo.id}']`);
 
   if (todo.deleted) {
-    if (item) {
-      item.style.animation = 'fadeOut 0.3s ease';
-      setTimeout(() => item.remove(), 300);
-    }
+    if (item) item.remove();
     return;
   }
 
@@ -33,34 +30,21 @@ function renderTodo(todo) {
   `;
 
   if (item) {
-    item.style.animation = 'fadeOut 0.3s ease';
-    setTimeout(() => {
-      list.replaceChild(newlist, item);
-    }, 300);
+    list.replaceChild(newlist, item);
   } else {
     list.append(newlist);
   }
-  
-  checkEmptyState();
 }
 
 function myFunction(text) {
-  const title = document.querySelector('.app-title');
-  const emptyState = document.querySelector('.empty-state');
-  
-  title.classList.add('hidden');
-  emptyState.classList.add('hidden');
-  
-  setTimeout(() => {
-    const todoobject = {
-      text,
-      checked: false,
-      id: Date.now(),
-      day: currentDay
-    };
-    demoarray.push(todoobject);
-    renderTodo(todoobject);
-  }, 500);
+  const todoobject = {
+    text,
+    checked: false,
+    id: Date.now(),
+    day: currentDay
+  };
+  demoarray.push(todoobject);
+  renderTodo(todoobject);
 }
 
 function toggleDone(key) {
@@ -80,17 +64,6 @@ function deleteTodo(key) {
   }
 }
 
-function checkEmptyState() {
-  const title = document.querySelector('.app-title');
-  const emptyState = document.querySelector('.empty-state');
-  const dayTodos = demoarray.filter(todo => todo.day === currentDay && !todo.deleted);
-  
-  if (dayTodos.length === 0) {
-    title.classList.remove('hidden');
-    emptyState.classList.remove('hidden');
-  }
-}
-
 const form = document.querySelector(".formselect");
 form.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -99,7 +72,6 @@ form.addEventListener("submit", (event) => {
   if (text !== "") {
     myFunction(text);
     input.value = "";
-    input.focus();
   }
 });
 
@@ -134,6 +106,14 @@ if (emojiBtn) {
   });
 }
 
+function renderAllTodos() {
+  const list = document.querySelector(".todo-list");
+  list.innerHTML = '';
+  
+  demoarray
+    .filter(todo => todo.day === currentDay && !todo.deleted)
+    .forEach(todo => renderTodo(todo));
+}
 
 let days = document.querySelectorAll("#days li");
 days.forEach(day => {
@@ -153,16 +133,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const ref = localStorage.getItem("demoarray");
   if (ref) {
     demoarray = JSON.parse(ref);
+    renderAllTodos();
   }
-  
-  renderAllTodos();
-  
-  const input = document.querySelector(".inputselect");
-  input.addEventListener("focus", () => {
-    if (demoarray.filter(todo => todo.day === currentDay && !todo.deleted).length === 0) {
-      document.querySelector('.app-title').classList.remove('hidden');
-      document.querySelector('.empty-state').classList.remove('hidden');
-    }
-  });
 });
-
