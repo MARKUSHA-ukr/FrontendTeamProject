@@ -38,9 +38,9 @@ or simply open **index.html** in your browser.
 
 Special thanks to the people who helped build this project:
 
-* 
-* 
-* 
+* MARKUSHA-ukr — Team Lead
+* loomstroom
+* tarik-pixel 
 
 ---
 
